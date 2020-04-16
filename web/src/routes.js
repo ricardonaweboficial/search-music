@@ -11,7 +11,7 @@ export default function Routes() {
 		<BrowserRouter>
 			<Switch>
 				<Route path="/" exact component={Home}/>
-				<Route path="/music/:idTrack" component={Music}/>
+				<Route path="/music/:idVideo" component={Music}/>
 			</Switch>
 		</BrowserRouter>
 	);
