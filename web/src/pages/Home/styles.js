@@ -15,9 +15,7 @@ export const MusicContainer = styled.div`
 		align-items:center;
 	} 
 
-	section {
-		display:flex;
-	}
+	section { display:flex; }
 `;
 
 export const InputSearch = styled.input`
@@ -46,6 +44,7 @@ export const ListMusic = styled.ul`
 	grid-template-columns:repeat(3, 1fr);
 	margin: 20px auto;
 	align-items:center;
+
 `;
 
 export const ItemList = styled.li`
@@ -80,9 +79,7 @@ export const ButtonPage = styled.button`
 	border-radius:4px;
 	transition:0.2s;
 
-	&:hover  {
-		background:#c1c1c1;
-	}
+	&:hover { background:#c1c1c1; }
 `;
 
 export const LoadingMusics = styled.div`
@@ -97,11 +94,19 @@ export const LoadingMusics = styled.div`
 	svg {
 		margin-right:8px;
 		font-size:30px;
-		animation: loading 1s linear infinite;
+		animation: loading 2s linear infinite;
 	}
 
 	@keyframes loading {
 		to { transform: rotate(360deg); }
     }
 
+`;
+
+export const NotFound = styled.h1`
+	top:0;
+	left:38%;
+	position:absolute;
+	margin-top:20%;
+	color:#0e0e0e;
 `;
