@@ -34,7 +34,7 @@ export default function Music() {
 		}
 
 		loadMusic();
-	}, []);
+	}, [idVideo]);
 
 	function handleBack() {
 		history.push('/');
