@@ -14,7 +14,8 @@ import {
 	ButtonPage, 
 	ListMusic,
 	ItemList,
-	LoadingMusics
+	LoadingMusics,
+	NotFound
 } from './styles';
 
 function Home() {
@@ -28,9 +29,12 @@ function Home() {
 
 	async function loadMusics(e) {
 		e.preventDefault();
-		setLoading(true);
+		setMusics([]);
+		
 		try {
+			setLoading(true);
 			const response = await fetch(`https://theaudiodb.com/api/v1/json/1/search.php?s=${search}`);
+
 			const data = await response.json();
 
 			const id = data.artists.map(artist => (
@@ -40,9 +44,13 @@ function Home() {
 			const dataVideo = await responseVideo.json();
 			setMusics(dataVideo.mvids);
 			console.log(dataVideo.mvids);
-			setLoading(false);
+
+			setLoading(false);	
+
 		} catch (err) {
-			console.log('erro:' + err)
+			alert('Erro ao pesquisar este artista, tente novamente.');
+			setLoading(false);
+			setSearch('');
 		}
 	}
 
@@ -65,7 +73,7 @@ function Home() {
 			</form>
 			<section>
 				<ListMusic>
-						{musics.map(music => (
+						{musics !== null ? musics.map(music => (
 							<ItemList key={music.idTrack}>
 								<Title>{music.strTrack}</Title>
 								<ImageMusic src={music.strTrackThumb === null ? music.strTrackThumb = musicImg : music.strTrackThumb} alt="Music"/>	
@@ -74,7 +82,7 @@ function Home() {
 								</ButtonPage>
 							</ItemList>
 							)
-						)}
+						) : <NotFound>Error search musics of your artist</NotFound>}
 				</ListMusic>
 
 
