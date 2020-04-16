@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FiSearch } from 'react-icons/fi';
+import { FiSearch, FiLoader } from 'react-icons/fi';
 
 import { useHistory } from 'react-router-dom';
 
@@ -13,18 +13,22 @@ import {
 	ImageMusic, 
 	ButtonPage, 
 	ListMusic,
-	ItemList 
+	ItemList,
+	LoadingMusics
 } from './styles';
 
 function Home() {
 	const [ musics, setMusics ] = useState([]);
-	const [ search, setSearch ] = useState('coldplay');
+	const [ search, setSearch ] = useState('');
+
+	const [ loading, setLoading ] = useState(false);
 
 	const history = useHistory();
 
 
 	async function loadMusics(e) {
 		e.preventDefault();
+		setLoading(true);
 		try {
 			const response = await fetch(`https://theaudiodb.com/api/v1/json/1/search.php?s=${search}`);
 			const data = await response.json();
@@ -36,10 +40,10 @@ function Home() {
 			const dataVideo = await responseVideo.json();
 			setMusics(dataVideo.mvids);
 			console.log(dataVideo.mvids);
+			setLoading(false);
 		} catch (err) {
 			console.log('erro:' + err)
 		}
-
 	}
 
 	async function handlePage(id) {
@@ -61,17 +65,25 @@ function Home() {
 			</form>
 			<section>
 				<ListMusic>
-					{musics.map(music => (
-						<ItemList key={music.idTrack}>
-							<Title>{music.strTrack}</Title>
-							<ImageMusic src={music.strTrackThumb === null ? music.strTrackThumb = musicImg : music.strTrackThumb} alt="Music"/>	
-							<ButtonPage onClick={() => handlePage(music.idTrack)}>
-								Click here
-							</ButtonPage>
-						</ItemList>
-					))}
+						{musics.map(music => (
+							<ItemList key={music.idTrack}>
+								<Title>{music.strTrack}</Title>
+								<ImageMusic src={music.strTrackThumb === null ? music.strTrackThumb = musicImg : music.strTrackThumb} alt="Music"/>	
+								<ButtonPage onClick={() => handlePage(music.idTrack)}>
+									Click here
+								</ButtonPage>
+							</ItemList>
+							)
+						)}
 				</ListMusic>
+
+
 			</section>
+			{loading && (
+				<LoadingMusics>
+					<FiLoader /> Loading
+				</LoadingMusics>
+			)}
 		</MusicContainer>
 	);
 }

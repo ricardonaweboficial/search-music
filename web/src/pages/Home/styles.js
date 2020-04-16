@@ -17,7 +17,6 @@ export const MusicContainer = styled.div`
 
 	section {
 		display:flex;
-		
 	}
 `;
 
@@ -86,3 +85,23 @@ export const ButtonPage = styled.button`
 	}
 `;
 
+export const LoadingMusics = styled.div`
+	text-align:center;
+	margin-top: 20%;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+	font-size:20px;
+	font-weight:bold;
+
+	svg {
+		margin-right:8px;
+		font-size:30px;
+		animation: loading 1s linear infinite;
+	}
+
+	@keyframes loading {
+		to { transform: rotate(360deg); }
+    }
+
+`;
