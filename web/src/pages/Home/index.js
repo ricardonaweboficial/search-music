@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+
+//Icons
 import { FiSearch, FiLoader } from 'react-icons/fi';
 
+// Dependencies
 import { useHistory } from 'react-router-dom';
 
+//Image if not have
 import musicImg from '../../assets/nothingImg.png'
 
+// Class for container
 import { 
 	MusicContainer, 
 	InputSearch, 
@@ -26,7 +31,6 @@ function Home() {
 
 	const history = useHistory();
 
-
 	async function loadMusics(e) {
 		e.preventDefault();
 		setMusics([]);
@@ -34,19 +38,18 @@ function Home() {
 		try {
 			setLoading(true);
 			const response = await fetch(`https://theaudiodb.com/api/v1/json/1/search.php?s=${search}`);
-
 			const data = await response.json();
 
 			const id = data.artists.map(artist => (
 				artist.idArtist
 			));
+
 			const responseVideo = await fetch(`https://theaudiodb.com/api/v1/json/1/mvid.php?i=${id.toString()}`);
 			const dataVideo = await responseVideo.json();
 			setMusics(dataVideo.mvids);
 			console.log(dataVideo.mvids);
 
 			setLoading(false);	
-
 		} catch (err) {
 			alert('Erro ao pesquisar este artista, tente novamente.');
 			setLoading(false);
@@ -57,8 +60,6 @@ function Home() {
 	async function handlePage(id) {
 		history.push(`/music/${id}`);
 	}
-
-
 
 	return (
 		<MusicContainer>
@@ -84,7 +85,6 @@ function Home() {
 							)
 						) : <NotFound>Error search musics of your artist</NotFound>}
 				</ListMusic>
-
 
 			</section>
 			{loading && (
