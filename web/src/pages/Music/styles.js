@@ -6,7 +6,6 @@ export const InfoContainer = styled.div`
 	max-width:1120px;
 	padding:40px;
 	height:100vh;
-
 	margin:0 auto;
 
 	section {
@@ -29,6 +28,7 @@ export const ButtonBack = styled.button`
 	align-items:center;
 	justify-content:center;
 	cursor:pointer;
+	
 	svg {
 		margin-right:8px;
 	}
@@ -57,6 +57,7 @@ export const InfoMusic = styled.div`
 export const InfoGroup = styled.div`
 	display:flex;
 	flex-direction:column;
+
 	h3, h4 {
 		color:#ADADAD;
 	}
