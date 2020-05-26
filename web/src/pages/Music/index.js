@@ -1,8 +1,12 @@
 import React, { useEffect, useState, Fragment } from 'react';
+
+//Dependencies
 import { useHistory, useParams } from 'react-router-dom';
 
+// Icons
 import { FiArrowLeft } from 'react-icons/fi';
 
+//Class for container
 import {
 	InfoContainer,
 	ButtonBack,
@@ -18,7 +22,6 @@ export default function Music() {
 	const [ music, setMusic ] = useState([]);
 
 	const { idVideo } = useParams();
-
 	const history = useHistory();
 
 	useEffect(() => {
@@ -71,5 +74,4 @@ export default function Music() {
 			</section>
 		</InfoContainer>
 	);
-
 }
